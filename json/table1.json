@@ -1,0 +1,26 @@
+{
+    "columns": [
+        "Denomination",
+        "Pieces",
+        "Amount"
+    ],
+
+    "rows": [
+        [
+            {"name": "5 cents", "value": "0.05"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"999\" required>",
+            "<span class=\"amount\">0.00</span>"
+        ],
+        
+        [
+            {"name": "10 cents", "value": "0.10"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"999\" required>",
+            "<span class=\"amount\">0.00</span>"
+        ],
+        [
+            {"name": "25 cents", "value": "0.25"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"999\" required>",
+            "<span class=\"amount\">0.00</span>"
+        ]
+    ]
+}

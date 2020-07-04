@@ -1,0 +1,60 @@
+{
+    "columns": [
+        "Denomination",
+        "Pieces",
+        "Amount"
+    ],
+
+    "rows": [
+        [
+            {"name": "1 peso", "value": "1.00"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"9999\" required>",
+            "<span class=\"amount\">0.00</span>"
+        ],
+        
+        [
+            {"name": "5 pesos", "value": "5.00"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"9999\" required>",
+            "<span class=\"amount\">0.00</span>"
+        ],
+        [
+            {"name": "10 pesos", "value": "10.00"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"9999\" required>",
+            "<span class=\"amount\">0.00</span>"
+        ],
+        [
+            {"name": "20 pesos", "value": "20.00"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"9999\" required>",
+            "<span class=\"amount\">0.00</span>"
+        ],
+        [
+            {"name": "50 pesos", "value": "50.00"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"999\" required>",
+            "<span class=\"amount\">0.00</span>"
+        ],
+
+        [
+            {"name": "100 pesos", "value": "100.00"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"999\" required>",
+            "<span class=\"amount\">0.00</span>"
+        ],
+
+        [
+            {"name": "200 pesos", "value": "200.00"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"999\" required>",
+            "<span class=\"amount\">0.00</span>"
+        ],
+
+        [
+            {"name": "500 pesos", "value": "500.00"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"999\" required>",
+            "<span class=\"amount\">0.00</span>"
+        ],
+
+        [
+            {"name": "1000 pesos", "value": "1000.00"},
+            "<input type=\"number\" name=\"\" class=\"pieces\" value=\"0\" min=\"0\" max=\"999\" >",
+            "<span class=\"amount\">0.00</span>"
+        ]
+    ]
+}

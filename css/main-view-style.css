@@ -1,0 +1,51 @@
+body {
+    background-color: #eeeeee;
+}
+
+.table-custom {
+    background-color: #ffffff;
+    border-radius: 10px;
+    width:95%;
+    margin: 3%;
+}
+
+.thead-custom {
+    border-bottom: 0.5px solid #000000;
+}
+
+.th-custom {
+    padding: 2%;
+}
+
+.tr-custom {
+    
+}
+
+.td-custom {
+    padding: 2%;
+}
+
+
+.denom-val-holder {
+    display: none;
+}
+
+
+.total-container {
+    padding: 1000px;
+    font-size: 16pt;
+}
+
+
+.top-btn {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 15px;
+    filter: opacity(0.8);
+    display: none;
+}
+
+.fa-arrow-up {
+    font-size: 24pt;
+}
