@@ -1,24 +1,4 @@
 $(document).ready(function() {
-    if (window.localStorage.length == 0){
-        $('#restore').prop('disabled', true);
-    }
-});
-
-$(document).ajaxSuccess(function () {
-    update();
-
-    //Pieces Object Event Listener
-    $('.pieces').on('input', function () {
-        if (this.value === "") {
-            this.value = 0;
-        }
-        update();
-    });
-
-    $('.pieces').on('focus', function () {
-        this.select();
-    });
-
 
     //Menu
     $('#restore').click(function () {
@@ -43,6 +23,27 @@ $(document).ajaxSuccess(function () {
         $('.pieces').val(0);
         update();
     });
+
+});
+
+$(document).ajaxSuccess(function () {
+    
+    initMenuButtons();
+    update();
+
+    //Pieces Object Event Listener
+    $('.pieces').on('input', function () {
+        if (this.value === "") {
+            this.value = 0;
+        }
+        update();
+        initMenuButtons();
+    });
+
+    $('.pieces').on('focus', function () {
+        this.select();
+    });
+    
 });
 
 
@@ -74,12 +75,10 @@ function update() {
 }
 
 function restore() {
-    if (localStorage.length > 0) {
-        var arr = JSON.parse(localStorage.getItem("piecesValues"));
-        for (var i = 0; i < pieces_obj.length; i++) {
-            pieces_obj[i].value = arr[i];
-            showDialogBox("Information", "Data restored.", 10);
-        }
+    var arr = JSON.parse(localStorage.getItem("piecesValues"));
+    for (var i = 0; i < pieces_obj.length; i++) {
+        pieces_obj[i].value = arr[i];
+        showDialogBox("Information", "Data restored.", 10);
     }
 }
 
@@ -104,18 +103,22 @@ function save() {
 }
 
 function saveAsPDF() {
-    var doc = new jsPDF();
-    var specialElementHandlers = {
-        "#editor": function(element, renderer) {
-            return true;
+    var data_obj = {
+        denomination: new Array(),
+        pieces: new Array(),
+        amount: new Array()
+    }
+    for (var i = 0; i < pieces_obj.length; i++){
+        if (pieces_obj[i].value != 0){
+            data_obj.denomination.push(denomination_obj[i].textContent);
+            data_obj.pieces.push(pieces_obj[i].value);
+            data_obj.amount.push(amount_obj[i].textContent);
+            notAllZero = true;
         }
     }
-
-    doc.fromHTML($('main')[0], 15, 15, {
-        width: 180,
-        elementHandlers: specialElementHandlers
-    });
-    doc.save('hello.pdf');
+    
+    window.sessionStorage.setItem("dataObj", JSON.stringify(data_obj));
+    window.open("pdf_file.html", "_blank");
 }
 
 
@@ -126,4 +129,23 @@ function showDialogBox(title, info, interval) {
     window.setInterval(function () {
         $('#dialogbox').modal('hide');
     }, interval * 1000);
+}
+
+
+function initMenuButtons() {
+    if (window.localStorage.length == 0){
+        $('#restore').prop('disabled', true);
+    }
+
+    var notAllZero = false;
+    for (var i = 0; i < pieces_obj.length; i++){
+        if (pieces_obj[i].value != 0){
+            notAllZero = true;
+        }
+    }
+    if (notAllZero === true) {
+        $('#save-as-pdf').prop('disabled', false);
+    } else{
+        $('#save-as-pdf').prop('disabled', true);
+    }
 }
