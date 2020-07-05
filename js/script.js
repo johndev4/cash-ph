@@ -1,4 +1,4 @@
-$(document).ajaxComplete(function() {
+$(document).ajaxSuccess(function() {
     const denomination_obj = document.getElementsByClassName('denom-val-holder')
     const pieces_obj = document.getElementsByClassName('pieces');
     const amount_obj = document.getElementsByClassName('amount');
@@ -29,7 +29,7 @@ $(document).ajaxComplete(function() {
     update();
 
 
-
+    //Pieces Object Event Listener
     $('.pieces').on('input', function() {
         if (this.value === ""){
             this.value = 0;
@@ -42,21 +42,21 @@ $(document).ajaxComplete(function() {
     });
 
 
-
-    $('#exit').click(function() {
-
-        document.onkeypress = function(e) {
-            alert(e.keyCode);
-        }
-
-        var e = document.createEvent('KeyboardEvent');
-        e.initEvent('keypress', true, true)
-        e.keyCode
-        document.dispatchEvent(e);
+    //Menu
+    $('#save').click(function() {
+        
     });
 
-    
+    $('#print').click(function() {
 
+    });
+
+    $('#exit').click(function() {
+        window.history.back();
+    });
+    
+    
+    //Edit
     $('#clear').click(function() {
         $('.pieces').val(0);
         update();
