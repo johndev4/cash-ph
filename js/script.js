@@ -44,10 +44,18 @@ $(document).ajaxComplete(function() {
 
 
     $('#exit').click(function() {
-        
-    })
 
+        document.onkeypress = function(e) {
+            alert(e.keyCode);
+        }
 
+        var e = document.createEvent('KeyboardEvent');
+        e.initEvent('keypress', true, true)
+        e.keyCode
+        document.dispatchEvent(e);
+    });
+
+    
 
     $('#clear').click(function() {
         $('.pieces').val(0);
