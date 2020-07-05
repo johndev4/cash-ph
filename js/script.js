@@ -1,53 +1,59 @@
-$(document).ajaxSuccess(function() {
+$(document).ready(function() {
+    if (window.localStorage.length == 0){
+        $('#restore').prop('disabled', true);
+    }
+});
+
+$(document).ajaxSuccess(function () {
     update();
 
     //Pieces Object Event Listener
-    $('.pieces').on('input', function() {
-        if (this.value === ""){
+    $('.pieces').on('input', function () {
+        if (this.value === "") {
             this.value = 0;
         }
         update();
     });
 
-    $('.pieces').on('focus', function() {
+    $('.pieces').on('focus', function () {
         this.select();
     });
 
 
     //Menu
-    $('#restore').click(function() {
+    $('#restore').click(function () {
         restore();
     });
 
-    $('#save').click(function() {
+    $('#save').click(function () {
         save();
     });
 
-    $('#save-as-pdf').click(function() {
-
+    $('#save-as-pdf').click(function () {
+        saveAsPDF();
     });
 
-    $('#exit').click(function() {
+    $('#exit').click(function () {
         window.history.back();
     });
-    
+
     
     //Edit
-    $('#clear').click(function() {
+    $('#clr').click(function () {
         $('.pieces').val(0);
         update();
     });
 });
 
 
-const denomination_obj = document.getElementsByClassName('denom-val-holder')
+const denomination_obj = document.getElementsByClassName('denom-val-holder');
 const pieces_obj = document.getElementsByClassName('pieces');
 const amount_obj = document.getElementsByClassName('amount');
 
 function update() {
     var total = 0;
 
-    for (var i = 0; i < pieces_obj.length; i+=1){
+    for (var i = 0; i < pieces_obj.length; i += 1) {
         var d = denomination_obj[i].textContent;
         var p = pieces_obj[i].value;
         var amt = parseFloat(d) * parseFloat(p);
@@ -68,37 +74,46 @@ function update() {
 }
 
 function restore() {
-    if (localStorage.length > 0){
+    if (localStorage.length > 0) {
         var arr = JSON.parse(localStorage.getItem("piecesValues"));
-    } else{
-        showDialogBox("Information", "There is no saved data.", 3);
+        for (var i = 0; i < pieces_obj.length; i++) {
+            pieces_obj[i].value = arr[i];
+            showDialogBox("Information", "Data restored.", 10);
+        }
     }
 }
 
 function save() {
     var arr = [];
     var notAllZero = false;
-    for (var i = 0; i < pieces_obj.length; i++){
+    for (var i = 0; i < pieces_obj.length; i++) {
         arr.push(pieces_obj[i].value);
-        if (pieces_obj[i].value != 0){
+        if (pieces_obj[i].value != 0) {
             notAllZero = true;
         }
     }
     var str = JSON.stringify(arr);
 
-    if (notAllZero === true){
+    if (notAllZero === true) {
         window.localStorage.setItem("piecesValues", str);
-        showDialogBox("Information", "Data succefully saved.", 3);
-    } else{
-        showDialogBox("Information", "All inputs are empty.", 3);
+        showDialogBox("Information", "Data saved.", 10);
+        $('#restore').prop('disabled', false);
+    } else {
+        showDialogBox("Information", "All inputs are empty.", 10);
     }
 }
+
+function saveAsPDF() {
+    var doc = new jsPDF();
+    doc.save('hello.pdf');
+}
+
 
 function showDialogBox(title, info, interval) {
     $('#dialogboxLongTitle').text(title);
     $('#dialogboxInfo').text(info);
     $('#dialogbox').modal('show');
-    window.setInterval(function() {
+    window.setInterval(function () {
         $('#dialogbox').modal('hide');
-    }, interval*1000);
+    }, interval * 1000);
 }
