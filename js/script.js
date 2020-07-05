@@ -105,6 +105,16 @@ function save() {
 
 function saveAsPDF() {
     var doc = new jsPDF();
+    var specialElementHandlers = {
+        "#editor": function(element, renderer) {
+            return true;
+        }
+    }
+
+    doc.fromHTML($('main')[0], 15, 15, {
+        width: 180,
+        elementHandlers: specialElementHandlers
+    });
     doc.save('hello.pdf');
 }
 
