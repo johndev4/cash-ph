@@ -3,16 +3,27 @@
 <head>
     <title>Document</title>
     <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 </head>
-<body>
-    <table>
-        <thead>
-            <th>Denomination</th>
-            <th>Pieces</th>
-            <th>Amount</th>
-        </thead>
-    </table>
 
+<body style="font-family:monospace; font-size: 14pt">
+
+    <div id="pdf">
+        <script>
+            var date = new Date();
+            document.write("<p>PDF Date: " + date.toUTCString() + "</p>");
+        </script>
+
+        <table>
+            <thead>
+                <th>Denomination</th>
+                <th>Pieces</th>
+                <th>Amount</th>
+            </thead>
+        </table>
+    </div>
+    
     <script src="js/generate-pdf.js"></script>
 </body>
+
 </html>

@@ -106,7 +106,8 @@ function saveAsPDF() {
     var data_obj = {
         denomination: new Array(),
         pieces: new Array(),
-        amount: new Array()
+        amount: new Array(),
+        total: $('#total').text()
     }
     for (var i = 0; i < pieces_obj.length; i++){
         if (pieces_obj[i].value != 0){
