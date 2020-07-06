@@ -22,6 +22,7 @@ $(document).ready(function() {
     $('#clr').click(function () {
         $('.pieces').val(0);
         update();
+        initMenuButtons();
     });
 
 });
