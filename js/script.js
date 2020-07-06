@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
 
     $('#exit').click(function () {
-        window.history.back();
+        window.location.href = "/"
     });
 
     
@@ -75,6 +75,7 @@ function update() {
     );
 }
 
+
 function restore() {
     var arr = JSON.parse(localStorage.getItem("piecesValues"));
     for (var i = 0; i < pieces_obj.length; i++) {
@@ -82,6 +83,7 @@ function restore() {
         showDialogBox("Information", "Data restored.", 10);
     }
 }
+
 
 function save() {
     var arr = [];
@@ -103,24 +105,23 @@ function save() {
     }
 }
 
+
 function saveAsPDF() {
     var data_obj = {
-        denomination: new Array(),
-        pieces: new Array(),
-        amount: new Array(),
-        total: $('#total').text()
+        rows: [],
+        total: [["", "Total:", $('#total').text()]]
     }
+
     for (var i = 0; i < pieces_obj.length; i++){
-        if (pieces_obj[i].value != 0){
-            data_obj.denomination.push(denomination_obj[i].textContent);
-            data_obj.pieces.push(pieces_obj[i].value);
-            data_obj.amount.push(amount_obj[i].textContent);
-            notAllZero = true;
-        }
+        var columns = [
+            denomination_obj[i].textContent,
+            pieces_obj[i].value,
+            amount_obj[i].textContent
+        ];
+        data_obj['rows'].push(columns);
     }
-    
-    window.sessionStorage.setItem("dataObj", JSON.stringify(data_obj));
-    window.open("pdf_file.html", "_blank");
+
+    generatePDF(data_obj);
 }
 
 

@@ -1,48 +1,29 @@
-var data_obj = JSON.parse(window.sessionStorage.getItem("dataObj"));
-window.sessionStorage.clear();
+function generatePDF(data_obj) {
+    const doc = new jsPDF();
+    const date = new Date();
+    var addOnMonth = (date.getDate() < 10) ? "0" : "";
+    var addOnDate = (date.getDate() < 10) ? "0" : "";
+    var pdfDate = addOnMonth + date.getMonth() + "-" + addOnDate + date.getDate() + "-" + date.getFullYear();
 
-for (var i = 0; i < data_obj.denomination.length; i++){
-    var tr = document.createElement('tr');
-
-    for (var j = 0; j < 3; j++){
-        var td = document.createElement('td');
-
-        if (j == 0){
-            td.textContent = data_obj.denomination[i];
-        } else if (j == 1){
-            td.textContent = data_obj.pieces[i];
-        } else if (j == 2){
-            td.textContent = data_obj.amount[i];
-        }
+    doc.setFont("helvetica");
+    doc.setFontType("bold");
+    doc.setFontSize(14);
+    doc.text("Cash PH", 95, 15);
+    doc.autoTable({
+        styles: {
+            font: 'courier',
+            overflow: 'hidden',
+            cellWidth: 'wrap'
+        },
+        margin: {
+            horizontal: 15,
+            vertical: 25
+        },
         
-        tr.appendChild(td);
-    }
+        head: [["Denomination", "Pieces", "Amount"]],
+        body: data_obj.rows,
+        foot: data_obj.total
+    });
 
-    document.getElementsByTagName('table')[0].appendChild(tr);
+    doc.save("cash-ph-" + pdfDate + ".pdf");
 }
-
-
-var tr = document.createElement('tr');
-
-for (var i = 0; i < 3; i++){
-    var td = document.createElement('td');
-    td.style = "border-top: 0.5px solid #000000";
-
-    if (i == 1){
-        td.textContent = "Total:";
-    } else if (i == 2){
-        td.textContent = data_obj.total;
-    }
-
-    tr.append(td);
-}
-
-document.getElementsByTagName('table')[0].appendChild(tr);
-
-var printDate = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear();
-var doc = new jsPDF();
-doc.fromHTML(document.getElementById('pdf'), 15, 15);
-doc.save("cash-ph-" + printDate + ".pdf");
-setInterval(function() {
-    window.close();
-}, 1);
