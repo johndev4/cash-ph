@@ -19,7 +19,7 @@ function generatePDF(data_obj) {
             horizontal: 15,
             vertical: 25
         },
-        
+
         head: [["Denomination", "Pieces", "Amount"]],
         body: data_obj.rows,
         foot: data_obj.total

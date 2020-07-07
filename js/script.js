@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     //Menu
     $('#restore').click(function () {
@@ -13,7 +13,7 @@ $(document).ready(function() {
         saveAsPDF();
     });
 
-    
+
     //Edit
     $('#clr').click(function () {
         $('.pieces').val(0);
@@ -24,7 +24,7 @@ $(document).ready(function() {
 });
 
 $(document).ajaxSuccess(function () {
-    
+
     initMenuButtons();
     update();
 
@@ -40,7 +40,7 @@ $(document).ajaxSuccess(function () {
     $('.pieces').on('focus', function () {
         this.select();
     });
-    
+
 });
 
 
@@ -108,7 +108,7 @@ function saveAsPDF() {
         total: [["", "Total:", $('#total').text()]]
     }
 
-    for (var i = 0; i < pieces_obj.length; i++){
+    for (var i = 0; i < pieces_obj.length; i++) {
         var columns = [
             denomination_obj[i].textContent,
             pieces_obj[i].value,
@@ -132,19 +132,19 @@ function showDialogBox(title, info, interval) {
 
 
 function initMenuButtons() {
-    if (window.localStorage.length == 0){
+    if (window.localStorage.length == 0) {
         $('#restore').prop('disabled', true);
     }
 
     var notAllZero = false;
-    for (var i = 0; i < pieces_obj.length; i++){
-        if (pieces_obj[i].value != 0){
+    for (var i = 0; i < pieces_obj.length; i++) {
+        if (pieces_obj[i].value != 0) {
             notAllZero = true;
         }
     }
     if (notAllZero === true) {
         $('#save-as-pdf').prop('disabled', false);
-    } else{
+    } else {
         $('#save-as-pdf').prop('disabled', true);
     }
 }
