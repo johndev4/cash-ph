@@ -13,10 +13,6 @@ $(document).ready(function() {
         saveAsPDF();
     });
 
-    $('#exit').click(function () {
-        window.location.href = "/"
-    });
-
     
     //Edit
     $('#clr').click(function () {
