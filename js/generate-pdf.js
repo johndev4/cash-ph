@@ -1,9 +1,6 @@
 function generatePDF(data_obj) {
     const doc = new jsPDF();
-    const date = new Date();
-    var addOnMonth = (date.getMonth() < 10) ? "0" : "";
-    var addOnDate = (date.getDate() < 10) ? "0" : "";
-    var pdfDate = addOnMonth + date.getMonth() + "-" + addOnDate + date.getDate() + "-" + date.getFullYear();
+    var pdfDate = getPdfDate();
 
     doc.setFont("helvetica");
     doc.setFontType("bold");
@@ -26,4 +23,14 @@ function generatePDF(data_obj) {
     });
 
     doc.save("cash-ph-" + pdfDate + ".pdf");
+}
+
+function getPdfDate() {
+    const date = new Date();
+    var month = parseInt(date.getMonth()) + 1;
+    month = (month < 10)? '0'+month : month;
+    var day = date.getDate();
+    var year = date.getFullYear();
+
+    return month + '-' + day + '-' + year;
 }
