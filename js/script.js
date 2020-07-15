@@ -16,9 +16,7 @@ $(document).ready(function () {
 
     //Edit
     $('#clr').click(function () {
-        $('.pieces').val(0);
-        update();
-        initMenuButtons();
+        clr()
     });
 
 });
@@ -106,7 +104,7 @@ function restore() {
     var arr = JSON.parse(localStorage.getItem("piecesValues"));
     for (var i = 0; i < pieces_obj.length; i++) {
         pieces_obj[i].value = arr[i];
-        showDialogBox("Information", "Data restored.", 10);
+        showDialogBox("Information", "Data restored.", 3);
     }
     update();
     initMenuButtons();
@@ -126,10 +124,10 @@ function save() {
 
     if (notAllZero === true) {
         window.localStorage.setItem("piecesValues", str);
-        showDialogBox("Information", "Data saved.", 10);
+        showDialogBox("Information", "Data saved.", 3);
         $('#restore').prop('disabled', false);
     } else {
-        showDialogBox("Information", "All inputs are empty.", 10);
+        showDialogBox("Information", "All inputs are empty.", 3);
     }
 }
 
@@ -141,7 +139,7 @@ function saveAsPDF() {
     }
 
     for (var i = 0; i < pieces_obj.length; i++) {
-        if (pieces_obj[i].value != 0){
+        if (pieces_obj[i].value != 0) {
             var columns = [
                 denomination_obj[i].textContent,
                 pieces_obj[i].value,
@@ -152,4 +150,12 @@ function saveAsPDF() {
     }
 
     generatePDF(data_obj);
+}
+
+
+function clr() {
+    $('.pieces').val(0);
+    update();
+    initMenuButtons();
+    showDialogBox("Information", "All cleared.", 3);
 }
