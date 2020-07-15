@@ -1,7 +1,7 @@
 function generatePDF(data_obj) {
     const doc = new jsPDF();
     const date = new Date();
-    var addOnMonth = (date.getDate() < 10) ? "0" : "";
+    var addOnMonth = (date.getMonth() < 10) ? "0" : "";
     var addOnDate = (date.getDate() < 10) ? "0" : "";
     var pdfDate = addOnMonth + date.getMonth() + "-" + addOnDate + date.getDate() + "-" + date.getFullYear();
 

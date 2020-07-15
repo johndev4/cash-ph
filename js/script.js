@@ -48,6 +48,7 @@ const denomination_obj = document.getElementsByClassName('denom-val-holder');
 const pieces_obj = document.getElementsByClassName('pieces');
 const amount_obj = document.getElementsByClassName('amount');
 
+
 function update() {
     var total = 0;
 
@@ -72,12 +73,43 @@ function update() {
 }
 
 
+function initMenuButtons() {
+    if (window.localStorage.length == 0) {
+        $('#restore').prop('disabled', true);
+    }
+
+    var notAllZero = false;
+    for (var i = 0; i < pieces_obj.length; i++) {
+        if (pieces_obj[i].value != 0) {
+            notAllZero = true;
+        }
+    }
+    if (notAllZero === true) {
+        $('#save-as-pdf').prop('disabled', false);
+    } else {
+        $('#save-as-pdf').prop('disabled', true);
+    }
+}
+
+
+function showDialogBox(title, info, interval) {
+    $('#dialogboxLongTitle').text(title);
+    $('#dialogboxInfo').text(info);
+    $('#dialogbox').modal('show');
+    window.setInterval(function () {
+        $('#dialogbox').modal('hide');
+    }, interval * 1000);
+}
+
+
 function restore() {
     var arr = JSON.parse(localStorage.getItem("piecesValues"));
     for (var i = 0; i < pieces_obj.length; i++) {
         pieces_obj[i].value = arr[i];
         showDialogBox("Information", "Data restored.", 10);
     }
+    update();
+    initMenuButtons();
 }
 
 
@@ -109,42 +141,15 @@ function saveAsPDF() {
     }
 
     for (var i = 0; i < pieces_obj.length; i++) {
-        var columns = [
-            denomination_obj[i].textContent,
-            pieces_obj[i].value,
-            amount_obj[i].textContent
-        ];
-        data_obj['rows'].push(columns);
+        if (pieces_obj[i].value != 0){
+            var columns = [
+                denomination_obj[i].textContent,
+                pieces_obj[i].value,
+                amount_obj[i].textContent
+            ];
+            data_obj['rows'].push(columns);
+        }
     }
 
     generatePDF(data_obj);
-}
-
-
-function showDialogBox(title, info, interval) {
-    $('#dialogboxLongTitle').text(title);
-    $('#dialogboxInfo').text(info);
-    $('#dialogbox').modal('show');
-    window.setInterval(function () {
-        $('#dialogbox').modal('hide');
-    }, interval * 1000);
-}
-
-
-function initMenuButtons() {
-    if (window.localStorage.length == 0) {
-        $('#restore').prop('disabled', true);
-    }
-
-    var notAllZero = false;
-    for (var i = 0; i < pieces_obj.length; i++) {
-        if (pieces_obj[i].value != 0) {
-            notAllZero = true;
-        }
-    }
-    if (notAllZero === true) {
-        $('#save-as-pdf').prop('disabled', false);
-    } else {
-        $('#save-as-pdf').prop('disabled', true);
-    }
 }
