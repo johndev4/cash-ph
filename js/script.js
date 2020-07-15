@@ -104,7 +104,7 @@ function restore() {
     var arr = JSON.parse(localStorage.getItem("piecesValues"));
     for (var i = 0; i < pieces_obj.length; i++) {
         pieces_obj[i].value = arr[i];
-        showDialogBox("Information", "Data restored.", 3);
+        showDialogBox("Information", "Data restored.", 5);
     }
     update();
     initMenuButtons();
@@ -124,10 +124,10 @@ function save() {
 
     if (notAllZero === true) {
         window.localStorage.setItem("piecesValues", str);
-        showDialogBox("Information", "Data saved.", 3);
+        showDialogBox("Information", "Data saved.", 5);
         $('#restore').prop('disabled', false);
     } else {
-        showDialogBox("Information", "All inputs are empty.", 3);
+        showDialogBox("Information", "All inputs are empty.", 5);
     }
 }
 
@@ -157,5 +157,5 @@ function clr() {
     $('.pieces').val(0);
     update();
     initMenuButtons();
-    showDialogBox("Information", "All cleared.", 3);
+    showDialogBox("Information", "All cleared.", 5);
 }
