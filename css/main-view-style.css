@@ -46,6 +46,6 @@ body {
     display: none;
 }
 
-.fa-arrow-up {
+.btn > .fas {
     font-size: 24pt;
 }
