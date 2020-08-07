@@ -1,4 +1,4 @@
-$.getJSON("json/table1.json", function (table) {
+$.getJSON("assets/json/table1.json", function (table) {
     var thead = document.createElement('thead');
     thead.setAttribute("class", "thead-custom");
     document.getElementById('table1').appendChild(thead);
@@ -29,7 +29,7 @@ $.getJSON("json/table1.json", function (table) {
     }
 });
 
-$.getJSON("json/table2.json", function (table) {
+$.getJSON("assets/json/table2.json", function (table) {
     var thead = document.createElement('thead');
     thead.setAttribute("class", "thead-custom");
     document.getElementById('table2').appendChild(thead);
